@@ -22,6 +22,7 @@ class Baseline(torch.nn.Module):
 class Serious(torch.nn.Module):
     def __init__(self, args):
         # float, half
+        super().__init__()
         self.model = torch.nn.Sequential(
             torch.nn.Linear(32 * 32, 512),
             torch.nn.ReLU(),
@@ -31,3 +32,6 @@ class Serious(torch.nn.Module):
             torch.nn.BatchNorm1d(256),
             torch.nn.Linear(256, args.num_classes),
         )
+
+    def forward(self, inputs):
+        return self.model(inputs)
