@@ -5,7 +5,7 @@ import torch
 import data
 import metrics
 import models
-import Optimizer
+import optimizers
 import runner
 
 
@@ -18,7 +18,7 @@ def main():
     train, validation = data_class.train(), data_class.validation()
 
     model = models.get(args)
-    optimizer = Optimizer.get(args, model.parameters())
+    optimizer = optimizers.get(args, model.parameters())
     criterion = torch.nn.CrossEntropyLoss()
 
     for epoch in range(args.epochs):
