@@ -9,6 +9,6 @@ def loss(logits, y):
     return torch.nn.functional.cross_entropy(logits, y)
 
 
-def print(metrics):
-    for name, value in metrics:
-        print("Name: ", value)
+def print_metrics(metrics):
+    for metric, value in metrics.items():
+        print(f"{metric}: {value}")

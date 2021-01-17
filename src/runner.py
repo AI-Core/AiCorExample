@@ -1,5 +1,5 @@
 import collections
-
+import metrics
 import torch
 
 # Train
@@ -7,7 +7,7 @@ import torch
 # On given arguments, data
 
 
-def run(model, criterion, optimizer, dataset, is_training: bool, **metrics):
+def run(model, criterion, optimizer, dataset, is_training: bool, metrics):
     model.train(is_training)
 
     dictionary = collections.defaultdict(int)
@@ -16,7 +16,7 @@ def run(model, criterion, optimizer, dataset, is_training: bool, **metrics):
     with torch.set_grad_enabled(is_training):
         for X, y in dataset:
             counter += 1
-            y_pred = model(X)
+            y_pred = model(X.squeeze().reshape(X.shape[0], -1))
 
             loss = criterion(y_pred, y)
             for name, metric in metrics.items():
